@@ -33,10 +33,10 @@ const getMyCourses = async (req, res, next) => {
         if (req.user.role === 'instructor') {
             courses = await Course.find({ instructorId: userId });
         } else {
-            const allCourses = await Course.find({ studentIds: userId });
+            const userCourses = await Course.find({ studentsIds: userId });
 
-            courses = allCourses;
-            const appointments = Promise.all(allCourses.map(async course => {
+            courses = userCourses;
+            const appointments = Promise.all(userCourses.map(async course => {
                 return await Appointment.find({ courseId: course._id }, {});
             }))
         }
