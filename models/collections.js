@@ -51,6 +51,7 @@ const courseSchema = new mongoose.Schema({
     }],
     room: String,
     hoursOfDeprivation: Number,
+    section: String,
     instructorId: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "User",
