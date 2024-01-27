@@ -34,11 +34,13 @@ const getMyCourses = async (req, res, next) => {
             courses = await Course.find({ instructorId: userId });
         } else {
             const allCourses = await Course.find({ studentIds: userId });
+
+            courses = allCourses;
             const appointments = Promise.all(allCourses.map(async course => {
                 return await Appointment.find({ courseId: course._id }, {});
             }))
         }
-        res.status(200).json(allCourses);
+        res.status(200).json(courses);
 
     } catch (error) {
         if (!error.statusCode) {
