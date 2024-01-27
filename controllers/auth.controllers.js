@@ -43,7 +43,7 @@ const signup = async (req, res, next) => {
 
         const message = `Your activation code is ${key}\n if you didn't request the code just ignore it`;
 
-        await ssendEmail('Activation Code', newUser.email, message);
+        await sendEmail('Activation Code', newUser.email, message);
 
         res.status(201).json({
             success: true,
