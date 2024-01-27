@@ -2,7 +2,7 @@
 @baseURL=https://ibeacon-api.cyclic.app
 # @baseURL=http://localhost:8080
 @accessTokenInstructor=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NWFlOWQ4ODNkNzk2MjJiOWNmNTNhYTIiLCJuYW1lIjoiaW4xIiwiZW1haWwiOiJpbjFAZ21haWwuY29tIiwicGFzc3dvcmQiOiIkMmIkMTAkdElVOS9iNnF3N1RsVkFmZFdBSkhydVlEdklFclcwYTljYktDRy91dUZjdHUuQ3F4RGJqR0siLCJyb2xlIjoiaW5zdHJ1Y3RvciIsInVuaXZlcnNpdHlOYW1lIjoidGVzdCIsIl9fdiI6MCwiaWF0IjoxNzA1OTQyNDE1LCJleHAiOjE3MDY1NDcyMTV9.hHDmPZUq96wW-mGQ-Aurk0K1upFAbHe3PE4CXXZi4uI
-@accessTokenStudent=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NWFlYjIyNjljMWEzMjQ5MmZjZjg1ODgiLCJuYW1lIjoiamFsYWwiLCJlbWFpbCI6ImphbGFsQGdtYWlsLmNvbSIsInBhc3N3b3JkIjoiJDJiJDEwJDBRLmZ6Y1F3VlZUT0g4QklSaUxwN3V5bnhBSFdaTWJ6NjMyQjFBWHBNL3ovbEM3Sy5hVUM2Iiwicm9sZSI6InN0dWRlbnQiLCJjb2xsZWdlSWQiOjI4ODgsImZjbVRva2VuIjoiZmhXbnY5dHVTSUc5NFl0ZkRjTDUyTTpBUEE5MWJFV2l0ZUpQbTNHdXNUaGFZTkVNYTZpVGNrUlpLem1sNVMweEdVNzd4SnV6Rk1BTFVDdnM2b3ZYZzVDUVBzNUhkM1cydGwyMUVzT0xtSUs1TEQwejVCVlRMTVF2Z1B0aGVUcjBfTFNqU0puOENXQkRmN1pnYU1BWTNCQ1g4V0xTU1I4S2lQaiIsInVuaXZlcnNpdHlOYW1lIjoic2F1ZGkiLCJfX3YiOjAsImlhdCI6MTcwNjE0MzE4OSwiZXhwIjoxNzA2NzQ3OTg5fQ.pGu_tkLKKosmcpiPWrZrP6L95CvMWQvnxbwSRA27ffw
+@accessTokenStudent=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NWI1MzJmNzQ3M2JjYmRhY2QxNjA3NDEiLCJuYW1lIjoiSmFsYWwiLCJlbWFpbCI6ImFobWFkZmFvdXI4QGdtYWlsLmNvbSIsInBhc3N3b3JkIjoiJDJiJDEwJEVmZ2hzaDFPOVBoUXQwOHhJL2o1VS5rRGIwVmhrZnFMWVZDbUFaMDlNSWYwTEE4TFdlM1NLIiwicm9sZSI6InN0dWRlbnQiLCJjb2xsZWdlSWQiOjI4ODgsInVuaXF1ZUlkIjoiOGRlYWVlNDBmZmNmNjc0NCIsImZjbVRva2VuIjoiZmhXbnY5dHVTSUc5NFl0ZkRjTDUyTTpBUEE5MWJIVklSREh0bG0zYnd6cGx0cC1EY3lXYUV4TmRCR25FbWNBclI4dk5pb2dnOTNJb3d6b01uNEZrekE5enc5YjRkRnRUZjlXY1dpYmZzOS1hSEloN0hZM0xwU2ZjTkpfaENqUkN5V0V0N2xBb3U3ZFMtb3RNQUcxaU1hQkIwWGZEdEczclIzSSIsInVuaXZlcnNpdHlOYW1lIjoiU3lyaWEiLCJzdGF0dXMiOiJhY3RpdmF0ZWQiLCJfX3YiOjAsImlhdCI6MTcwNjM3NTY4MiwiZXhwIjoxNzA2OTgwNDgyfQ.4jaEgMlVJvlnoUghGeejiSoGg4m9D6ne7OxYWJjRssc
 
 ###
 
@@ -16,7 +16,7 @@ Content-Type: application/json
 {
     "name":"in1",
     "email":"ilovepython90@gmail.com",
-    "password":"pass1",
+    "password":"ali",
     "universityName":"test",
     "role":"instructor"
 }
@@ -41,8 +41,9 @@ POST {{baseURL}}/login
 Content-Type: application/json
 
 {
-    "email":"ahmadjalalfaour@gmail.com",
-    "password":"jalal"
+    "email":"ahmadfaour8@gmail.com",
+    "password":"jalal",
+    "uniqueId": "8deaee40ffcf6744"
 }
 
 ### activate account
