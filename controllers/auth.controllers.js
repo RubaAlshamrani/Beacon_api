@@ -43,7 +43,7 @@ const signup = async (req, res, next) => {
 
         const message = `Your activation code is ${key}\n if you didn't request the code just ignore it`;
 
-        sendEmail('Activation Code', newUser.email, message);
+        await ssendEmail('Activation Code', newUser.email, message);
 
         res.status(201).json({
             success: true,
@@ -203,6 +203,7 @@ const confirmPasswordChange = async (req, res, next) => {
     try {
         const activationKey = req.body.key;
         const key = await ActivationKey.findOne({ key: activationKey });
+
         if (!key) {
             const error = new Error("Invalid activation key");
             error.statusCode = 404;

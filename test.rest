@@ -15,7 +15,7 @@ Content-Type: application/json
 
 {
     "name":"in1",
-    "email":"in2@gmail.com",
+    "email":"ilovepython90@gmail.com",
     "password":"pass1",
     "universityName":"test",
     "role":"instructor"
@@ -51,7 +51,7 @@ POST {{baseURL}}/activateAccount
 Content-Type: application/json
 
 {
-    "key": "743364"
+    "key": "819055"
 }
 
 ### Get all courses
