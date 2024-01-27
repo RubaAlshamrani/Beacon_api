@@ -1,0 +1,219 @@
+# @baseURL=https://ibeaconattendanceproject-api.onrender.com
+@baseURL=https://ibeacon-api.cyclic.app
+# @baseURL=http://localhost:8080
+@accessTokenInstructor=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NWFlOWQ4ODNkNzk2MjJiOWNmNTNhYTIiLCJuYW1lIjoiaW4xIiwiZW1haWwiOiJpbjFAZ21haWwuY29tIiwicGFzc3dvcmQiOiIkMmIkMTAkdElVOS9iNnF3N1RsVkFmZFdBSkhydVlEdklFclcwYTljYktDRy91dUZjdHUuQ3F4RGJqR0siLCJyb2xlIjoiaW5zdHJ1Y3RvciIsInVuaXZlcnNpdHlOYW1lIjoidGVzdCIsIl9fdiI6MCwiaWF0IjoxNzA1OTQyNDE1LCJleHAiOjE3MDY1NDcyMTV9.hHDmPZUq96wW-mGQ-Aurk0K1upFAbHe3PE4CXXZi4uI
+@accessTokenStudent=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NWFlYjIyNjljMWEzMjQ5MmZjZjg1ODgiLCJuYW1lIjoiamFsYWwiLCJlbWFpbCI6ImphbGFsQGdtYWlsLmNvbSIsInBhc3N3b3JkIjoiJDJiJDEwJDBRLmZ6Y1F3VlZUT0g4QklSaUxwN3V5bnhBSFdaTWJ6NjMyQjFBWHBNL3ovbEM3Sy5hVUM2Iiwicm9sZSI6InN0dWRlbnQiLCJjb2xsZWdlSWQiOjI4ODgsImZjbVRva2VuIjoiZmhXbnY5dHVTSUc5NFl0ZkRjTDUyTTpBUEE5MWJFV2l0ZUpQbTNHdXNUaGFZTkVNYTZpVGNrUlpLem1sNVMweEdVNzd4SnV6Rk1BTFVDdnM2b3ZYZzVDUVBzNUhkM1cydGwyMUVzT0xtSUs1TEQwejVCVlRMTVF2Z1B0aGVUcjBfTFNqU0puOENXQkRmN1pnYU1BWTNCQ1g4V0xTU1I4S2lQaiIsInVuaXZlcnNpdHlOYW1lIjoic2F1ZGkiLCJfX3YiOjAsImlhdCI6MTcwNjE0MzE4OSwiZXhwIjoxNzA2NzQ3OTg5fQ.pGu_tkLKKosmcpiPWrZrP6L95CvMWQvnxbwSRA27ffw
+
+###
+
+GET {{baseURL}}/ 
+
+### signup as insturctor
+
+POST {{baseURL}}/signup 
+Content-Type: application/json
+
+{
+    "name":"in1",
+    "email":"in2@gmail.com",
+    "password":"pass1",
+    "universityName":"test",
+    "role":"instructor"
+}
+
+### signup as student
+
+POST {{baseURL}}/signup 
+Content-Type: application/json
+
+{
+    "name":"ahmadjalalfaour",
+    "email":"ahmadjalalfaour@gmail.com",
+    "password":"jalal",
+    "universityName":"test",
+    "role":"student",
+    "collegeId": 55121
+}
+
+### login
+
+POST {{baseURL}}/login 
+Content-Type: application/json
+
+{
+    "email":"ahmadjalalfaour@gmail.com",
+    "password":"jalal"
+}
+
+### activate account
+
+POST {{baseURL}}/activateAccount
+Content-Type: application/json
+
+{
+    "key": "743364"
+}
+
+### Get all courses
+
+GET {{baseURL}}/course
+Content-Type: application/json
+Authorization: Bearer {{accessTokenStudent}}
+
+### Get a course
+
+GET {{baseURL}}/course/65a191b973cc48364c6ef917
+Content-Type: application/json
+Authorization: Bearer {{accessTokenInstructor}}
+
+### Add course
+
+POST {{baseURL}}/course 
+Content-Type: application/json
+Authorization: Bearer {{accessTokenInstructor}}
+
+{
+    "name": "New Course 5",
+    "room": "lab 5",
+    "hoursOfDeprivation": 5
+}
+
+### Edit course details
+
+PUT {{baseURL}}/course/65a191b973cc48364c6ef917
+Content-Type: application/json
+Authorization: Bearer {{accessTokenInstructor}}
+
+{
+    "name": "New Course 1",
+    "room": "lab 1"
+}
+
+### Get all appointments of a course
+
+GET {{baseURL}}/course/65ae9da93d79622b9cf53aa7/appointment
+Content-Type: application/json
+Authorization: Bearer {{accessTokenInstructor}}
+
+### Get appointment details
+
+GET {{baseURL}}/course/65a8175449dd3d6957d186a8/appointment/659ef1e0358e8c6b18a4ac2f
+Content-Type: application/json
+Authorization: Bearer {{accessTokenInstructor}}
+
+
+### Add new appointment to a course
+
+POST {{baseURL}}/course/65ae9da93d79622b9cf53aa7/appointment
+Content-Type: application/json
+Authorization: Bearer {{accessTokenInstructor}}
+
+{
+    "name": "t session",
+    "start": "2024-01-21T23:38:25.891+00:00",
+    "end": "2024-01-21T23:38:25.891+00:00"
+}
+
+### Edit an appointment
+
+PUT {{baseURL}}/course/65a191b973cc48364c6ef917/appointment/659effaf22f393e6e79580ad
+Content-Type: application/json
+Authorization: Bearer {{accessTokenInstructor}}
+
+{
+    "name": "Third Session",
+    "start": "Wed, 10 Jan 2024 19:36:32 GMT",
+    "end": "Wed, 11 Jan 2024 21:36:32 GMT"
+}
+
+
+### Get students in course
+
+GET {{baseURL}}/course/65a8175449dd3d6957d186a8/students
+Content-Type: application/json
+Authorization: Bearer {{accessTokenInstructor}}
+
+
+### Add (list) of students to a course
+
+POST {{baseURL}}/course/65a8175449dd3d6957d186a8/addStudentsByArray
+Content-Type: application/json
+Authorization: Bearer {{accessTokenInstructor}}
+
+{
+    "studentsIds": ["65a30ebea43e62d2f565bf14"]
+}
+
+
+### Add (list) of students to a course by excel
+
+POST {{baseURL}}/course/65a8175449dd3d6957d186a8/addStudentsByArray
+Content-Type: application/json
+Authorization: Bearer {{accessTokenInstructor}}
+
+{
+    "excel": 
+}
+
+
+### check appointment status
+
+GET {{baseURL}}/appointment/65a817d649dd3d6957d186bc/isOpen
+Content-Type: application/json
+Authorization: Bearer {{accessTokenStudent}}
+
+### Attend a student to an appointment
+
+POST {{baseURL}}/appointment/65a817c549dd3d6957d186b9/attend
+Content-Type: application/json
+Authorization: Bearer {{accessTokenStudent}}
+
+### Attend a student by id manualy by instructor
+
+POST {{baseURL}}/appointment/65a817c549dd3d6957d186b9/attendStudentById
+Content-Type: application/json
+Authorization: Bearer {{accessTokenInstructor}}
+
+{
+    "studentId": "65a8162949dd3d6957d186a4"
+}
+
+### Get students status for abscence and attendance
+
+GET {{baseURL}}/appointment/65a817c549dd3d6957d186b9/students
+Content-Type: application/json
+Authorization: Bearer {{accessTokenInstructor}}
+
+### Get absence to for appointment
+
+GET {{baseURL}}/apology
+Content-Type: application/json
+Authorization: Bearer {{accessTokenInstructor}}
+
+
+### Add absence to an appointment
+
+POST {{baseURL}}/appointment/65a817c549dd3d6957d186b9/apology
+Content-Type: application/json
+Authorization: Bearer {{accessTokenStudent}}
+
+{
+    "reason": "test"
+}
+
+### Send Notifications
+POST {{baseURL}}/course/65aeb2d49c1a32492fcf859b/sendNotification
+Content-Type: application/json
+Authorization: Bearer {{accessTokenInstructor}}
+
+{
+    "title": "اول اشعار",
+    "description": "اول اشعار"
+}
+
+### get Notifications for a student
+
+GET {{baseURL}}/notification
+Content-Type: application/json
+Authorization: Bearer {{accessTokenStudent}}
+
