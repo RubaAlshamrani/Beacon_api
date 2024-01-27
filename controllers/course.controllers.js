@@ -5,22 +5,25 @@ const moment = require('moment');
 
 
 const admin = require('firebase-admin');
+const firebaseConfing = require("../ibeacon-3795f-firebase-adminsdk-f5ydg-edc69b070c.json")
 
-admin.initializeApp({
-    credential: admin.credential.cert({
-        "type": process.env.type,
-        "project_id": process.env.project_id,
-        "private_key_id": process.env.private_key_id,
-        "private_key": process.env.private_key,
-        "client_email": process.env.client_email,
-        "client_id": process.env.client_id,
-        "auth_uri": process.env.auth_uri,
-        "token_uri": process.env.token_uri,
-        "auth_provider_x509_cert_url": process.env.auth_provider_x509_cert_url,
-        "client_x509_cert_url": process.env.client_x509_cert_url,
-        "universe_domain": process.env.universe_domain
-    }),
-});
+admin.initializeApp(firebaseConfing);
+
+// admin.initializeApp({
+//     credential: admin.credential.cert({
+//         "type": process.env.type,
+//         "project_id": process.env.project_id,
+//         "private_key_id": process.env.private_key_id,
+//         "private_key": process.env.private_key,
+//         "client_email": process.env.client_email,
+//         "client_id": process.env.client_id,
+//         "auth_uri": process.env.auth_uri,
+//         "token_uri": process.env.token_uri,
+//         "auth_provider_x509_cert_url": process.env.auth_provider_x509_cert_url,
+//         "client_x509_cert_url": process.env.client_x509_cert_url,
+//         "universe_domain": process.env.universe_domain
+//     }),
+// });
 
 
 const getMyCourses = async (req, res, next) => {
@@ -31,7 +34,9 @@ const getMyCourses = async (req, res, next) => {
             courses = await Course.find({ instructorId: userId });
         } else {
             const allCourses = await Course.find({ studentIds: userId });
-            
+            const appointments = Promise.all(allCourses.map(async course => {
+                return await Appointment.find({ courseId: course._id }, {});
+            }))
         }
         res.status(200).json(allCourses);
 
