@@ -30,7 +30,6 @@ const getMyCourses = async (req, res, next) => {
     try {
         const userId = req.user._id;
         let courses;
-        const now = Date.now();
 
         if (req.user.role === 'instructor') {
             courses = await Course.find({ instructorId: userId });
@@ -38,49 +37,18 @@ const getMyCourses = async (req, res, next) => {
             const userCourses = await Course.find({ studentsIds: userId });
 
             const editedCourses = await Promise.all(userCourses.map(async (course) => {
-                const appointments = await Appointment.aggregate([
-                    {
-                        $match: {
-                            courseId: course._id,
-                            start: { $lt: new Date() }
-                        }
-                    },
-                    {
-                        $lookup: {
-                            from: "users",
-                            localField: "attendanceList.studentId",
-                            foreignField: "_id",
-                            as: "attendanceUsers"
-                        }
-                    },
-                    {
-                        $project: {
-                            _id: 0,
-                            courseId: 1,
-                            totalAbsenceHours: {
-                                $sum: {
-                                    $map: {
-                                        input: "$attendanceList",
-                                        as: "attendance",
-                                        in: {
-                                            $divide: [
-                                                {
-                                                    $subtract: [
-                                                        { $toLong: "$$attendance.end" },
-                                                        { $toLong: "$$attendance.start" }
-                                                    ]
-                                                },
-                                                3600000 // Convert milliseconds to hours
-                                            ]
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                ]);
+                const appointments = await Appointment.find({ courseId: course._id, start: { $lt: new Date() } });
 
-                const totalAbsenceHours = appointments.reduce((acc, app) => acc + app.totalAbsenceHours, 0);
+                let totalAbsenceHours = 0;
+                for (let appointment of appointments) {
+                    for (let attendance of appointment.attendanceList) {
+                        const startTime = new Date(attendance.timestamp);
+                        const endTime = new Date(appointment.end);
+                        const diffInMillisecs = Math.abs(endTime - startTime);
+                        const diffInHours = diffInMillisecs / (1000 * 60 * 60);
+                        totalAbsenceHours += diffInHours;
+                    }
+                }
 
                 const modifiedCourse = course.toObject();
                 modifiedCourse['absenceHours'] = totalAbsenceHours;
@@ -89,7 +57,6 @@ const getMyCourses = async (req, res, next) => {
             }));
 
             courses = editedCourses;
-            console.log(courses);
         }
 
         res.status(200).json(courses);
