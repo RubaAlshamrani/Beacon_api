@@ -36,9 +36,8 @@ const getMyCourses = async (req, res, next) => {
             courses = await Course.find({ instructorId: userId });
         } else {
             const userCourses = await Course.find({ studentsIds: userId });
-            courses = userCourses;
 
-            const editedCourses = Promise.all(userCourses.map(async (course) => {
+            const editedCourses = await Promise.all(userCourses.map(async (course) => {
                 const appointments = await Appointment.aggregate([
                     {
                         $match: {
@@ -78,14 +77,16 @@ const getMyCourses = async (req, res, next) => {
 
                 const totalAbsenceHours = appointments.reduce((acc, app) => acc + app.totalAbsenceHours, 0);
 
-                course = course.toObject();
-                course['absenceHours'] = totalAbsenceHours;
+                const modifiedCourse = course.toObject();
+                modifiedCourse['absenceHours'] = totalAbsenceHours;
 
-                return course;
+                return modifiedCourse;
             }));
-            console.log(await editedCourses);
+
+            courses = editedCourses;
+            console.log(courses);
         }
-        console.log(courses);
+
         res.status(200).json(courses);
 
     } catch (error) {
@@ -93,9 +94,10 @@ const getMyCourses = async (req, res, next) => {
             error.statusCode = 500;
         }
         next(error);
-
     }
 }
+
+
 
 const getCourse = async (req, res, next) => {
     try {
