@@ -34,10 +34,7 @@ const getMyCourses = async (req, res, next) => {
         if (req.user.role === 'instructor') {
             courses = await Course.find({ instructorId: userId });
         } else {
-            const userCourses = await Course.find({ studentsIds: userId }).populate({
-                path: 'instructorId',
-                select: 'name',
-            });
+            const userCourses = await Course.find({ studentsIds: userId });
 
             const editedCourses = [];
             for (let course of userCourses) {
@@ -57,7 +54,10 @@ const getMyCourses = async (req, res, next) => {
 
                 const modifiedCourse = course.toObject();
                 modifiedCourse['absenceHours'] = totalAbsenceHours;
-                modifiedCourse['instructorName'] = course.instructorId.name;
+
+                const instructor = await User.findById(course.instructorId);
+
+                modifiedCourse['instructorName'] = instructor.name;
 
                 editedCourses.push(modifiedCourse);
             }
