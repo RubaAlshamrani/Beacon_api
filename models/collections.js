@@ -88,7 +88,8 @@ const appointmentSchema = new mongoose.Schema({
                 type: Date,
                 default: Date.now,
             },
-        }]
+        }],
+        unique: true,
     },
     status: {
         type: String,
