@@ -63,9 +63,14 @@ const getMyCourses = async (req, res, next) => {
                                         input: "$attendanceList",
                                         as: "attendance",
                                         in: {
-                                            $subtract: [
-                                                { $hour: "$$attendance.start" },
-                                                { $hour: "$$attendance.end" }
+                                            $divide: [
+                                                {
+                                                    $subtract: [
+                                                        { $toLong: "$$attendance.end" },
+                                                        { $toLong: "$$attendance.start" }
+                                                    ]
+                                                },
+                                                3600000 // Convert milliseconds to hours
                                             ]
                                         }
                                     }
