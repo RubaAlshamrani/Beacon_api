@@ -302,7 +302,7 @@ const checkAppointmentStatus = async (req, res, next) => {
             const startAtHumanized = moment(appointment.start).fromNow();
             message = "Appointment not started yet. Starts " + startAtHumanized
             isOpen = false;
-        } else if (appointment.end < now) {
+        } else if (moment(appointment.start).add(15, 'm').toDate() < now) {
             const endAtHumanized = moment(appointment.end).fromNow();
             message = "Appointment already ended. Ended " + endAtHumanized
             isOpen = false;
