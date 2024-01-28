@@ -38,7 +38,7 @@ const getMyCourses = async (req, res, next) => {
             const userCourses = await Course.find({ studentsIds: userId });
             courses = userCourses;
 
-            const courses = Promise.all(userCourses.map(async course => {
+            const editedCourses = Promise.all(userCourses.map(async course => {
                 const courseAppointments = await Appointment.find({
                     courseId: course._id,
                     start: { $lt: now }
