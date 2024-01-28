@@ -58,7 +58,8 @@ const getMyCourses = async (req, res, next) => {
 
             courses = editedCourses;
         }
-
+        print(editedCourses)
+        print(courses)
         res.status(200).json(courses);
 
     } catch (error) {
