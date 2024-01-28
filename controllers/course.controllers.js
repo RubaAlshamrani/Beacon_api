@@ -39,12 +39,13 @@ const getMyCourses = async (req, res, next) => {
             const editedCourses = [];
             for (let course of userCourses) {
                 const appointments = await Appointment.find({ courseId: course._id, start: { $lt: new Date() } });
+                console.log("course appointments: " + appointments.toString());
 
                 let totalAbsenceHours = 0;
                 for (let appointment of appointments) {
-                    for (let attendance of appointment.attendanceList) {
-                        const startTime = new Date(attendance.timestamp);
-                        const endTime = new Date(appointment.end);
+                    if (!appointment.attendanceList.includes(userId)) {
+                        const startTime = appointment.start
+                        const endTime = appointment.end
                         const diffInMillisecs = Math.abs(endTime - startTime);
                         const diffInHours = diffInMillisecs / (1000 * 60 * 60);
                         totalAbsenceHours += diffInHours;
