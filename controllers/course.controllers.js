@@ -38,16 +38,16 @@ const getMyCourses = async (req, res, next) => {
             const userCourses = await Course.find({ studentsIds: userId });
             courses = userCourses;
 
-            const editedCourses = Promise.all(userCourses.map(async course => {
-                const courseAppointments = await Appointment.find({
-                    courseId: course._id,
-                    start: { $lt: now }
-                }); // TODO and the user is not in the attendance list
-                // we take the list of the appointments and end-start = hours
-                // we add all the hours = absenceHours
-                course = course.toObject();
-                course['absenceHours'] = absenceHours
-            }));
+            // const editedCourses = Promise.all(userCourses.map(async course => {
+            //     const courseAppointments = await Appointment.find({
+            //         courseId: course._id,
+            //         start: { $lt: now }
+            //     }); // TODO and the user is not in the attendance list
+            //     // we take the list of the appointments and end-start = hours
+            //     // we add all the hours = absenceHours
+            //     course = course.toObject();
+            //     course['absenceHours'] = absenceHours
+            // }));
         }
         res.status(200).json(courses);
 
