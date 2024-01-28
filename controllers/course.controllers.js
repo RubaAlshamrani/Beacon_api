@@ -42,7 +42,7 @@ const getMyCourses = async (req, res, next) => {
                 const appointments = await Appointment.aggregate([
                     {
                         $match: {
-                            courseId: mongoose.Types.ObjectId(course._id),
+                            courseId: course._id,
                             start: { $lt: new Date() }
                         }
                     },
