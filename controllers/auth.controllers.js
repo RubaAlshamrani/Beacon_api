@@ -10,14 +10,15 @@ const JWT_SECRET = process.env.JWT_SECRET;
 
 const signup = async (req, res, next) => {
     try {
-        const user = await User.findOne({ email: req.body.email });
+        const email = req.body.email.toLowerCase();
+        const user = await User.findOne({ email: email });
         if (user) {
             const error = new Error("Email already exists");
             error.statusCode = 400;
             throw error;
         }
 
-        const isValid = validator.validate(req.body.email);
+        const isValid = validator.validate(email);
 
         if (!isValid) {
             const error = new Error("Email is not valid")
@@ -62,7 +63,9 @@ const signup = async (req, res, next) => {
 
 const login = async (req, res, next) => {
     try {
-        const user = await User.findOne({ email: req.body.email });
+        const email = req.body.email.toLowerCase();
+
+        const user = await User.findOne({ email });
         if (!user) {
             const error = new Error("User not found");
             error.statusCode = 404;
