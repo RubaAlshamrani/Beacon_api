@@ -47,7 +47,7 @@ const getMyCourses = async (req, res, next) => {
                     },
                     {
                         $lookup: {
-                            from: "users", // Assuming your User model is named "User"
+                            from: "users",
                             localField: "attendanceList.studentId",
                             foreignField: "_id",
                             as: "attendanceUsers"
@@ -64,8 +64,8 @@ const getMyCourses = async (req, res, next) => {
                                         as: "attendance",
                                         in: {
                                             $subtract: [
-                                                { $hour: "$end" },
-                                                { $hour: "$start" }
+                                                { $hour: "$attendance.start" },
+                                                { $hour: "$attendance.end" }
                                             ]
                                         }
                                     }
