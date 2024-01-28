@@ -55,9 +55,8 @@ const getMyCourses = async (req, res, next) => {
                 const modifiedCourse = course.toObject();
                 var number = totalAbsenceHours;
                 var rounded = Math.round(number * 10) / 10; // rounded is 12.3
-                var fixed = rounded.toFixed(1); // 'fixed' is always to one decimal point
 
-                modifiedCourse['absenceHours'] = fixed;
+                modifiedCourse['absenceHours'] = rounded;
 
                 const instructor = await User.findById(course.instructorId);
                 modifiedCourse['instructorName'] = instructor.name;
