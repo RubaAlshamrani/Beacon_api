@@ -57,8 +57,8 @@ const getMyCourses = async (req, res, next) => {
             }));
 
             courses = editedCourses;
+            console.log(editedCourses)
         }
-        console.log(editedCourses)
         console.log(courses);
         res.status(200).json(courses);
 
