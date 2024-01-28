@@ -38,16 +38,52 @@ const getMyCourses = async (req, res, next) => {
             const userCourses = await Course.find({ studentsIds: userId });
             courses = userCourses;
 
-            // const editedCourses = Promise.all(userCourses.map(async course => {
-            //     const courseAppointments = await Appointment.find({
-            //         courseId: course._id,
-            //         start: { $lt: now }
-            //     }); // TODO and the user is not in the attendance list
-            //     // we take the list of the appointments and end-start = hours
-            //     // we add all the hours = absenceHours
-            //     course = course.toObject();
-            //     course['absenceHours'] = absenceHours
-            // }));
+            const editedCourses = Promise.all(userCourses.map(async (course) => {
+                const appointments = await Appointment.aggregate([
+                    {
+                        $match: {
+                            courseId: mongoose.Types.ObjectId(course._id),
+                            start: { $lt: new Date() }
+                        }
+                    },
+                    {
+                        $lookup: {
+                            from: "users", // Assuming your User model is named "User"
+                            localField: "attendanceList.studentId",
+                            foreignField: "_id",
+                            as: "attendanceUsers"
+                        }
+                    },
+                    {
+                        $project: {
+                            _id: 0,
+                            courseId: 1,
+                            totalAbsenceHours: {
+                                $sum: {
+                                    $map: {
+                                        input: "$attendanceList",
+                                        as: "attendance",
+                                        in: {
+                                            $subtract: [
+                                                { $hour: "$end" },
+                                                { $hour: "$start" }
+                                            ]
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                ]);
+
+                const totalAbsenceHours = appointments.reduce((acc, app) => acc + app.totalAbsenceHours, 0);
+
+                course = course.toObject();
+                course['absenceHours'] = totalAbsenceHours;
+
+                return course;
+            }));
+            console.log(editedCourses);
         }
         res.status(200).json(courses);
 
