@@ -83,7 +83,7 @@ const getMyCourses = async (req, res, next) => {
 
                 return course;
             }));
-            console.log(editedCourses);
+            console.log(await editedCourses);
         }
         res.status(200).json(courses);
 
