@@ -64,8 +64,8 @@ const getMyCourses = async (req, res, next) => {
                                         as: "attendance",
                                         in: {
                                             $subtract: [
-                                                { $hour: "$attendance.start" },
-                                                { $hour: "$attendance.end" }
+                                                { $hour: "$$attendance.start" },
+                                                { $hour: "$$attendance.end" }
                                             ]
                                         }
                                     }
