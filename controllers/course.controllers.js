@@ -36,7 +36,8 @@ const getMyCourses = async (req, res, next) => {
         } else {
             const userCourses = await Course.find({ studentsIds: userId });
 
-            const editedCourses = await Promise.all(userCourses.map(async (course) => {
+            const editedCourses = [];
+            for (let course of userCourses) {
                 const appointments = await Appointment.find({ courseId: course._id, start: { $lt: new Date() } });
 
                 let totalAbsenceHours = 0;
@@ -53,13 +54,12 @@ const getMyCourses = async (req, res, next) => {
                 const modifiedCourse = course.toObject();
                 modifiedCourse['absenceHours'] = totalAbsenceHours;
 
-                return modifiedCourse;
-            }));
+                editedCourses.push(modifiedCourse);
+            }
 
             courses = editedCourses;
-            console.log(editedCourses)
         }
-        console.log(courses);
+
         res.status(200).json(courses);
 
     } catch (error) {
@@ -69,6 +69,7 @@ const getMyCourses = async (req, res, next) => {
         next(error);
     }
 }
+
 
 
 
