@@ -85,6 +85,7 @@ const getMyCourses = async (req, res, next) => {
             }));
             console.log(await editedCourses);
         }
+        console.log(courses);
         res.status(200).json(courses);
 
     } catch (error) {
