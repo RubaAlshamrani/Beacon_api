@@ -43,7 +43,7 @@ const getMyCourses = async (req, res, next) => {
 
                 let totalAbsenceHours = 0;
                 for (let appointment of appointments) {
-                    if (!appointment.attendanceList.includes(userId)) {
+                    if (!appointment.attendanceList.some(entry => entry.studentId.toString() === userId)) {
                         const startTime = appointment.start
                         const endTime = appointment.end
                         const diffInMillisecs = Math.abs(endTime - startTime);
