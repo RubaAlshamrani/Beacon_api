@@ -5,7 +5,6 @@ const moment = require('moment');
 
 
 const admin = require('firebase-admin');
-// const firebaseConfing = require("../ibeacon-3795f-firebase-adminsdk-f5ydg-edc69b070c.json")
 
 // admin.initializeApp(firebaseConfing);
 
@@ -33,6 +32,7 @@ const getMyCourses = async (req, res, next) => {
 
         if (req.user.role === 'instructor') {
             courses = await Course.find({ instructorId: userId });
+
         } else {
             const userCourses = await Course.find({ studentsIds: userId });
 
@@ -630,9 +630,9 @@ const addAppointmentApology = async (req, res, next) => {
             },
             tokens: [course.instructorId.fcmToken],
         };
-
-        await admin.messaging().sendEachForMulticast(message);
-
+        if (course.instructorId.fcmToken) {
+            await admin.messaging().sendEachForMulticast(message);
+        }
 
         res.status(201).json({
             success: true,
@@ -737,7 +737,8 @@ const sendNotificationToCourse = async (req, res, next) => {
 
         const registrationTokens = [];
         course.studentsIds.forEach(student => {
-            registrationTokens.push(student.fcmToken)
+            if (student.fcmToken)
+                registrationTokens.push(student.fcmToken)
         })
 
         const message = {

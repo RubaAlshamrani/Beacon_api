@@ -16,17 +16,11 @@ app.use(cors());
 app.use(morgan("dev"));
 
 
-
-
 const authRouter = require("./routes/auth.routes");
-const instructorRouter = require("./routes/instructor.routes");
-const indexRouter = require("./routes/index.routes");
 const courseRouter = require("./routes/course.routes")
 
 app.use(courseRouter)
 app.use(authRouter);
-app.use(instructorRouter);
-app.use(indexRouter);
 
 
 app.use((error, req, res, next) => {
@@ -41,7 +35,6 @@ mongoose
     .connect(MONGO_URI)
     .then(() => {
         console.log("Connected to MongoDB");
-        // checkAndCreateAdmin();
     })
     .catch((err) => console.error("MongoDB connection error:", err));
 
