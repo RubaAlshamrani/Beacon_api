@@ -1,6 +1,6 @@
-# @baseURL=https://ibeaconattendanceproject-api.onrender.com
-@baseURL=https://ibeacon-api.cyclic.app
-# @baseURL=http://localhost:8080
+#@baseURL=https://ibeaconattendanceproject-api.onrender.com
+#@baseURL=https://ibeacon-api.cyclic.app
+@baseURL=http://localhost:8080
 @accessTokenInstructor=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NWJiYzk5OWI2NmU1MDhmYmRlMDAxMWYiLCJuYW1lIjoiSmFsYWwgRmFvdXIiLCJlbWFpbCI6ImFobWFkamFsYWxmYW91ckBnbWFpbC5jb20iLCJwYXNzd29yZCI6IiQyYiQxMCRGcklKR25JNWo4N3B0Qk9VM2lTdThPaHFaTnozSnluOUIwTFdMcEJleTBWNGIuUERVSTl3cSIsInJvbGUiOiJpbnN0cnVjdG9yIiwidW5pcXVlSWQiOiI4ZGVhZWU0MGZmY2Y2NzQ0IiwiZmNtVG9rZW4iOiJjSU5EdUgtSFFmLWVLN0N4Qy1aWFB5OkFQQTkxYkV2cm4tREtGUzVvSFE3anhfcWE2VFloSS1TdThwNnFqUzNGNFRuanlmc0NkaEZ2WlR5d2syNGVoWklzTlhhbVBPNjVVWkJMQmhNdFN3d0RBdWFyQThqMURUZk9UejI3TFRzaFd3dTdnTHg1Njk4S0xWQWxhd1hIV3N0OVFiRDUwdnZGYU9LIiwidW5pdmVyc2l0eU5hbWUiOiJiZWFjb24iLCJzdGF0dXMiOiJhY3RpdmF0ZWQiLCJfX3YiOjAsImlhdCI6MTcwNjgwNTg0NCwiZXhwIjoxNzA3NDEwNjQ0fQ.O3sP5quMAu7Q68QLWAtjOwFM8c251yg8ovbamrV6__4
 @accessTokenStudent=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NWI1MzJmNzQ3M2JjYmRhY2QxNjA3NDEiLCJuYW1lIjoiSmFsYWwiLCJlbWFpbCI6ImFobWFkZmFvdXI4QGdtYWlsLmNvbSIsInBhc3N3b3JkIjoiJDJiJDEwJEVmZ2hzaDFPOVBoUXQwOHhJL2o1VS5rRGIwVmhrZnFMWVZDbUFaMDlNSWYwTEE4TFdlM1NLIiwicm9sZSI6InN0dWRlbnQiLCJjb2xsZWdlSWQiOjI4ODgsInVuaXF1ZUlkIjoiOGRlYWVlNDBmZmNmNjc0NCIsImZjbVRva2VuIjoiZmhXbnY5dHVTSUc5NFl0ZkRjTDUyTTpBUEE5MWJIVklSREh0bG0zYnd6cGx0cC1EY3lXYUV4TmRCR25FbWNBclI4dk5pb2dnOTNJb3d6b01uNEZrekE5enc5YjRkRnRUZjlXY1dpYmZzOS1hSEloN0hZM0xwU2ZjTkpfaENqUkN5V0V0N2xBb3U3ZFMtb3RNQUcxaU1hQkIwWGZEdEczclIzSSIsInVuaXZlcnNpdHlOYW1lIjoiU3lyaWEiLCJzdGF0dXMiOiJhY3RpdmF0ZWQiLCJfX3YiOjAsImlhdCI6MTcwNjM3NTY4MiwiZXhwIjoxNzA2OTgwNDgyfQ.4jaEgMlVJvlnoUghGeejiSoGg4m9D6ne7OxYWJjRssc
 
@@ -14,9 +14,9 @@ POST {{baseURL}}/signup
 Content-Type: application/json
 
 {
-    "name":"in1",
-    "email":"ilovepython90@gmail.com",
-    "password":"ali",
+    "name":"lolo",
+    "email":"Lamaturki.15@gmail.com",
+    "password":"1234567890",
     "universityName":"test",
     "role":"instructor"
 }
@@ -27,22 +27,23 @@ POST {{baseURL}}/signup
 Content-Type: application/json
 
 {
-    "name":"ahmadjalalfaour",
-    "email":"ahmadjalalfaour@gmail.com",
-    "password":"jalal",
+    "name":"ruba",
+    "email":"ruba.abd1421@gmail.com",
+    "password":"1234567890",
     "universityName":"test",
     "role":"student",
-    "collegeId": 55121
+    "collegeId": 0000
 }
 
 ### login
+
 
 POST {{baseURL}}/login 
 Content-Type: application/json
 
 {
-    "email":"ahmadjalalfaour@gmail.com",
-    "password":"jalal",
+    "email":"Lamaturki.15@gmail.com",
+    "password":"1234567890",
     "uniqueId": "8deaee40ffcf6744"
 }
 
